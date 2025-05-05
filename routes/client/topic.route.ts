@@ -8,4 +8,6 @@ router.get("/", controller.index);
 
 
 
-export default router;
+
+
+export const topicRoutes: Router = router;
