@@ -31,7 +31,37 @@ export const list = async (req: Request, res: Response) => {
 
         res.render("client/pages/songs/list.pug", {
             pageTitle: topic.title,
-            songs:songs
+            songs: songs
+        })
+    } catch (error) {
+
+    }
+}
+
+// [GET] /songs/detail/:slugSong
+export const detail = async (req: Request, res: Response) => {
+    try {
+        const slugSong: String = req.params.slugSong;
+        const song = await Song.findOne({
+            slug: slugSong,
+            deleted: false,
+            status: "active"
+        });
+        const singer = await Singer.findOne({
+            _id: song.singerId,
+            deleted: false,
+            status: "active"
+        }).select("fullName");
+        const topic = await Topic.findOne({
+            _id: song.topicId,
+            deleted: false
+        }).select("title");
+
+        res.render("client/pages/songs/detail", {
+            pageTitle: song.title,
+            song:song,
+            singer:singer,
+            topic:topic
         })
     } catch (error) {
 
