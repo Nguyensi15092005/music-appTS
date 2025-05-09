@@ -133,8 +133,17 @@ body{
     font-weight: 500;
     color: #464545;
 }
+.singer-detail .inner-actions .inner-like{
+    cursor: pointer;
+}
 .singer-detail .inner-actions .inner-like i{
     color: blue;
+}
+.singer-detail .inner-actions .inner-like.active{
+    color: blue;
+}
+.singer-detail .inner-actions .inner-like.active i{
+    font-weight: 900;
 }
 .singer-detail .inner-actions .inner-heart i{
     color: rgb(172, 15, 143);
@@ -151,7 +160,7 @@ body{
     border-radius: 50%;
     border: 5px solid #2f6343;
     margin-right: 15px;
-    animation: avatar 5s linear infinite;
+    animation: avatar 5s linear infinite paused;
 }
 @keyframes avatar {
     0% { transform: rotate(0deg); }
