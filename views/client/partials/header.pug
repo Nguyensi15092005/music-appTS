@@ -7,10 +7,25 @@ header(class="header")
           a(href="/")
             img(src="/client/img/LOGO.jpg" alt="")
       
-      .col-10 
+      .col-6 
         .inner-menu 
           ul  
             li
               a(href="/") Trang chủ
             li
              a(href="/topics") Chủ đề
+
+      .col-4 
+        .inner-acount
+          ul
+            if(user)
+              li    
+                a(href="/users/logout" class="btn btn-danger") Đăng xuất
+
+            else
+              li    
+                a(href="/users/register" class="btn btn-primary") Đăng ký
+              li 
+                a(href="/users/login" class="btn btn-success") Đăng nhập
+        
+        

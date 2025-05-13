@@ -34,7 +34,8 @@ export const list = async (req: Request, res: Response) => {
             songs: songs
         })
     } catch (error) {
-
+        req.flash("error", "Lỗi");
+        res.redirect("/");
     }
 }
 
@@ -64,7 +65,8 @@ export const detail = async (req: Request, res: Response) => {
             topic: topic
         })
     } catch (error) {
-
+        req.flash("error", "Lỗi");
+        res.redirect("/");
     }
 }
 
@@ -89,7 +91,8 @@ export const like = async (req: Request, res: Response) => {
             newLike: newLike
         })
     } catch (error) {
-
+        req.flash("error", "Lỗi");
+        res.redirect("/");
     }
 }
     
