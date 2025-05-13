@@ -74,7 +74,7 @@ export const loginPost = async (req: Request, res: Response) => {
         res.cookie("tokenUser", user.tokenUser);
 
         req.flash("success", "Đăng nhập thành công");
-        res.redirect("/users/login");
+        res.redirect("/");
     } catch (error) {
         req.flash("error", "Lỗi");
         res.redirect("/");

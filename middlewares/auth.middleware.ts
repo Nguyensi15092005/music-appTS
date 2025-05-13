@@ -3,7 +3,8 @@ import User from "../models/users.model";
 
 export const requireAuth = async (req: Request, res: Response, next: NextFunction) =>{
     if(!req.cookies.tokenUser){
-        res.redirect(`/user/login`);
+        res.redirect(`/users/login`);
+        return;
     }
     else{
         const user = await User.findOne({
@@ -11,10 +12,11 @@ export const requireAuth = async (req: Request, res: Response, next: NextFunctio
         }).select("-password");
 
         if(!user){
-            res.redirect(`/user/login`);
+            res.redirect(`/users/login`);
+            return;
         }
         else{
-            res.locals.user=user;
+            res.locals.user = user;
             next();
         }
     }

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Topic from "../../models/topic.model";
 import Song from "../../models/song.model";
 import Singer from "../../models/singer.model";
+import User from "../../models/users.model";
 
 
 // [GET] /songs/:slugTopic
@@ -43,11 +44,19 @@ export const list = async (req: Request, res: Response) => {
 export const detail = async (req: Request, res: Response) => {
     try {
         const slugSong: String = req.params.slugSong;
+        const tokenUser: string = req.cookies.tokenUser
+        const user = await User.findOne({
+            tokenUser: tokenUser,
+            deleted: false
+        });
         const song = await Song.findOne({
             slug: slugSong,
             deleted: false,
             status: "active"
         });
+
+        const active = song.like.includes(user.id) ? true : false; 
+
         const singer = await Singer.findOne({
             _id: song.singerId,
             deleted: false,
@@ -62,7 +71,8 @@ export const detail = async (req: Request, res: Response) => {
             pageTitle: song.title,
             song: song,
             singer: singer,
-            topic: topic
+            topic: topic,
+            active: active
         })
     } catch (error) {
         req.flash("error", "Lỗi");
@@ -75,15 +85,42 @@ export const like = async (req: Request, res: Response) => {
     try {
         const typeLike: string = req.params.typeLike;
         const idSong: string = req.params.idSong;
+        const tokenUser: string = req.cookies.tokenUser
+        if (!tokenUser) {
+            return;
+        }
         const song = await Song.findOne({
             _id: idSong,
             status: "active",
             deleted: false
         });
 
-        const newLike: number = typeLike == "like" ? song.like + 1 : song.like - 1;
+        const user = await User.findOne({
+            tokenUser: tokenUser,
+            deleted: false
+        })
 
-        await Song.updateOne({ _id: idSong }, { like: newLike });
+        const userLike = song.like.includes(user.id);
+        let newLike: number = 0
+        let countLike = song.like.length
+        if (!userLike && typeLike == "like") {
+            newLike = countLike + 1;
+            await Song.updateOne(
+                {
+                    _id: idSong
+                }, {
+                $push: { like: user.id }
+            });
+        }
+        else {
+            newLike = countLike - 1;
+            await Song.updateOne(
+                {
+                    _id: idSong
+                }, {
+                $pull: { like: user.id }
+            });
+        }
 
         res.json({
             code: 200,
@@ -95,5 +132,5 @@ export const like = async (req: Request, res: Response) => {
         res.redirect("/");
     }
 }
-    
+
 

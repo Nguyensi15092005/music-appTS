@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { requireAuth } from '../../middlewares/auth.middleware';
 
 import * as controller from "../../controller/client/song.controller";
 const router: Router = Router();
