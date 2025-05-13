@@ -60,7 +60,7 @@ body{
     margin-left: 20px;
 }
 .header .inner-acount ul li a{
-    color: #2f6343;
+    color: #ffffff;
     text-decoration: none;
     font-size: 18px;
     font-weight: 600;
@@ -199,8 +199,18 @@ body{
 .singer-detail .inner-actions .inner-like.active i{
     font-weight: 900;
 }
+
+.singer-detail .inner-actions .inner-heart{
+    cursor: pointer;
+}
 .singer-detail .inner-actions .inner-heart i{
     color: rgb(172, 15, 143);
+}
+.singer-detail .inner-actions .inner-heart.active{
+    color: rgb(172, 15, 143);
+}
+.singer-detail .inner-actions .inner-heart.active i{
+    font-weight: 900;
 }
 
 .singer-detail .inner-play{

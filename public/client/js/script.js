@@ -44,29 +44,56 @@ if (buttonLike) {
         fetch(link, option)
             .then(res => res.json())
             .then(data => {
-                const span = buttonLike.querySelector("span");
-                span.innerHTML = `${data.newLike} thích`;
+                if (data.code == 200) {
+                    const span = buttonLike.querySelector("span");
+                    span.innerHTML = `${data.newLike} thích`;
 
-                buttonLike.classList.toggle("active");
+                    buttonLike.classList.toggle("active");
+                }
             });
 
     })
 }
 // End Buton like
 
+// Buton favorite
+const buttonFavorite = document.querySelector("[button-favorite]");
+if (buttonFavorite) {
+    buttonFavorite.addEventListener("click", () => {
+        const idSong = buttonFavorite.getAttribute("button-favorite");
+        const isActive = buttonFavorite.classList.contains("active");
+        const typeFavorite = isActive ? "unfavorite" : "favorite";
+        const link = `/songs/favorite/${typeFavorite}/${idSong}`;
+
+        const option = {
+            method: "PATCH"
+        }
+
+        fetch(link, option)
+            .then(res => res.json())
+            .then(data => {
+                if (data.code == 200) {
+                    buttonFavorite.classList.toggle("active");
+                }
+            });
+
+    })
+}
+// End Buton favorite
+
 // Show-alert
 const showAlert = document.querySelector("[show-alert]");
 if (showAlert) {
-  const time = parseInt(showAlert.getAttribute("date-time"));
-  const close = showAlert.querySelector("[close-alert]")
-  console.log(time, close)
+    const time = parseInt(showAlert.getAttribute("date-time"));
+    const close = showAlert.querySelector("[close-alert]")
+    console.log(time, close)
 
-  setTimeout(() => {
-    showAlert.classList.add("alert-hidden")
-  }, time);
+    setTimeout(() => {
+        showAlert.classList.add("alert-hidden")
+    }, time);
 
-  close.addEventListener("click", () => {
-    showAlert.classList.add("alert-hidden")
-  })
+    close.addEventListener("click", () => {
+        showAlert.classList.add("alert-hidden")
+    })
 }
 // end Show-alert

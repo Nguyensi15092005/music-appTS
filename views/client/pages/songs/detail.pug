@@ -17,16 +17,20 @@ block main
               <i class="fa-solid fa-microphone-lines"></i> #{singer.fullName}
             div(class="inner-action inner-topic")
               <i class="fa-solid fa-music"></i> #{topic.title}
-            if active == true 
-              div(class="inner-action inner-like active" button-like=song.id)
-                <i class="fa-regular fa-thumbs-up"></i> 
-                span #{song.like.length} thích
-            else
-              div(class="inner-action inner-like" button-like=song.id)
-                <i class="fa-regular fa-thumbs-up"></i> 
-                span #{song.like.length} thích
-            div(class="inner-action inner-heart")
-              <i class="fa-regular fa-heart"></i> Bài nhạc yêu thích
+              
+            div(
+              class="inner-action inner-like " + (song.isLikeSong ? "active" : "") 
+              button-like=song.id
+            )
+              <i class="fa-regular fa-thumbs-up"></i> 
+              span #{song.like.length} thích
+
+            div(
+              class=("inner-action inner-heart " + (song.isFavoriteSong ? "active" : ""))
+              button-favorite=song.id
+            )
+              <i class="fa-regular fa-heart"></i> 
+              span Bài nhạc yêu thích
 
           .inner-play
             .inner-avatar 

@@ -3,6 +3,7 @@ import Topic from "../../models/topic.model";
 import Song from "../../models/song.model";
 import Singer from "../../models/singer.model";
 import User from "../../models/users.model";
+import FavoriteSong from "../../models/favorite-song.model";
 
 
 // [GET] /songs/:slugTopic
@@ -55,7 +56,14 @@ export const detail = async (req: Request, res: Response) => {
             status: "active"
         });
 
-        const active = song.like.includes(user.id) ? true : false; 
+        song["isLikeSong"] = song.like.includes(user.id) ? true : false;
+
+        const favorite = await FavoriteSong.findOne({
+            userId: user.id,
+            songId: song.id,
+        })
+
+        song["isFavoriteSong"] = favorite ? true : false;
 
         const singer = await Singer.findOne({
             _id: song.singerId,
@@ -72,7 +80,6 @@ export const detail = async (req: Request, res: Response) => {
             song: song,
             singer: singer,
             topic: topic,
-            active: active
         })
     } catch (error) {
         req.flash("error", "Lỗi");
@@ -126,6 +133,48 @@ export const like = async (req: Request, res: Response) => {
             code: 200,
             message: "Thành công",
             newLike: newLike
+        })
+    } catch (error) {
+        req.flash("error", "Lỗi");
+        res.redirect("/");
+    }
+}
+
+// [PATCH] /songs/favorite/:typeFavorite/:idSong
+export const favorite = async (req: Request, res: Response) => {
+    try {
+        const typeFavorite: string = req.params.typeFavorite;
+        const idSong: string = req.params.idSong;
+        const tokenUser: string = req.cookies.tokenUser
+        if (!tokenUser) {
+            return;
+        }
+
+        const user = await User.findOne({
+            tokenUser: tokenUser,
+            deleted: false
+        })
+
+        const favorite = await FavoriteSong.findOne({
+            userId: user.id,
+            songId: idSong,
+        })
+
+        if (!favorite && typeFavorite == "favorite") {
+            const data = {
+                userId: user.id,
+                songId: idSong,
+            }
+            const dataFavorite = new FavoriteSong(data);
+            await dataFavorite.save();
+
+        }
+        else {
+            await FavoriteSong.deleteOne({ _id: favorite.id });
+        }
+        res.json({
+            code: 200,
+            message: "Thành công",
         })
     } catch (error) {
         req.flash("error", "Lỗi");
