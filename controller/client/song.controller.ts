@@ -27,8 +27,10 @@ export const list = async (req: Request, res: Response) => {
                 status: "active",
                 deleted: false
             });
-
+        
             song["infoSinger"] = infoSinger;
+            song["countLike"] =  song.like.length;
+
         }
 
         res.render("client/pages/songs/list.pug", {

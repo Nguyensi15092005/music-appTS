@@ -154,6 +154,7 @@ body{
     font-weight: 600;
     font-size: 15px;
     color: #743cdb;
+    text-decoration: none;
 }
 .song-item .inner-content .inner-singer{
     font-size: 14px;
@@ -162,6 +163,14 @@ body{
 .song-item .inner-content .inner-like{
     color: blue;
     font-size: 14px;
+}
+.song-item .inner-content .inner-favorite{
+    color: rgb(172, 15, 143);
+    font-size: 14px;
+    cursor: pointer;
+}
+.song-item .inner-content .inner-favorite.active i{
+    font-weight: 900;
 }
 .song-item .inner-content .inner-time{
     font-size: 14px;
