@@ -10,6 +10,10 @@ const songSchema = new mongoose.Schema(
         like: Array,
         lyrics: String, // lời bài hát
         audio: String,
+        listen: {
+            type: Number,
+            default: 0
+        },
         status: String,
         slug: String,
         deleted: {

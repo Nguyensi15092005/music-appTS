@@ -24,6 +24,20 @@ if (aplayer) {
   ap.on('pause', function () {
     avatar.style.animationPlayState = "paused";
   });
+  ap.on('ended', function () {
+    const link = `/songs/listen/${dataSong._id}`;
+
+    const option = {
+      method: "PATCH"
+    }
+
+    fetch(link, option)
+      .then(res => res.json())
+      .then(data => {
+        const listen = document.querySelector(".singer-detail .inner-listen span");
+        listen.innerHTML = `${data.listen} Lược nghe`
+      });
+  });
   // hết sự kiện xoay khi bật tắt nhạc
 }
 // End APlayer
@@ -116,11 +130,12 @@ if (boxSearch) {
       .then(data => {
         if (data.code == 200) {
           const songs = data.songs;
+          console.log(songs)
           if (songs.length > 0) {
             boxSuggest.classList.add("show");
             const htmls = songs.map((song) => {
               return `
-                <a class="inner-item" href="/songs/detail/${song.slog}"> 
+                <a class="inner-item" href="/songs/detail/${song.slug}"> 
                   <div class="inner-image">  
                     <img src="${song.avatar}" alt="">
                   </div>
