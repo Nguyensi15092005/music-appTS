@@ -7,7 +7,7 @@ header(class="header")
           a(href="/")
             img(src="/client/img/LOGO.jpg" alt="")
       
-      .col-7
+      .col-7.d-flex.align-items-center
         .inner-menu 
           ul  
             if(user)
@@ -22,7 +22,16 @@ header(class="header")
                 a(href="/") <i class="fa-solid fa-house"></i> Trang chủ
               li
                 a(href="/topics") <i class="fa-solid fa-music"></i> Chủ đề
-
+        .box-search 
+          form(action="/search/result" method="GET")
+            div(class="form-group d-flex mb-0")
+              input(
+                type="text"
+                placeholder="Search..."
+                class="form-control"
+                name="keyword"
+                value=keyword
+              ) 
       .col-3
         .inner-acount
           ul

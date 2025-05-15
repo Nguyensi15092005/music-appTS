@@ -55,6 +55,7 @@ body{
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    justify-content: end;
 }
 .header .inner-acount > ul > li{
     margin-left: 20px;
