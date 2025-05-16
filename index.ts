@@ -8,6 +8,8 @@ import bodyParser from'body-parser';
 import flash from "express-flash";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import adminRoutes from "./routes/admin/index.route";
+import { systemConfig } from "./config/config";
 
 dotenv.config();
 database.connect();
@@ -29,8 +31,12 @@ app.use(express.static("public"));
 app.set("views", "./views");
 app.set('view engine', 'pug');
 
+// App Local Variables
+app.locals.prifixAdmin = systemConfig.prefixAdmin;
+
 // client Routes
 clientRoutes(app);
+adminRoutes(app);
 
 
 app.listen(port, () => {
