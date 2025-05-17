@@ -18,6 +18,33 @@ if (uploadImage) {
 
 }
 // end upload Image
+// upload audio
+const uploadAudio = document.querySelector("[upload-audio]");
+if (uploadAudio) {
+  const uploadAudioInput = uploadAudio.querySelector("[upload-audio-input]")
+  const uploadAudioPreview = uploadAudio.querySelector("[upload-audio-preview]")
+  const source = uploadAudio.querySelector("source")
+
+  const closeAudio = uploadAudio.querySelector("[close-audio]")
+
+  uploadAudioInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      source.src = URL.createObjectURL(file);
+      uploadAudioPreview.load();
+      uploadAudioPreview.style.display= "inline";
+      closeAudio.style.display= "inline";
+    }
+  })
+  closeAudio.addEventListener("click", () => {
+    uploadAudioInput.value = ""
+    uploadAudioPreview.src = ""
+    uploadAudioPreview.style.display= "none";
+    closeAudio.style.display= "none";
+  })
+
+}
+// end upload audio
 
 // Show-alert
 const showAlert = document.querySelector("[show-alert]");

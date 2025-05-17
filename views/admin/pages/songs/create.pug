@@ -59,12 +59,12 @@ block main
         class="image-preview"
         upload-image-preview
       )
-      button(
+      span(
         close-image 
         class="close-image"
       ) x
 
-    div(class="form-gruop")
+    div(class="form-gruop" upload-audio)
       label(for="audio") File âm thanh
       input(
         type="file"
@@ -72,7 +72,18 @@ block main
         class="form-control-file"
         id="audio"
         accept = "audio/*"
+        upload-audio-input
       )
+      audio(
+        controls
+        upload-audio-preview
+        class="audio-preview"
+      ) 
+        source(src="" class="audio-preview")
+      span(
+        close-audio 
+        class="close-audio"
+      ) x
     
     div(class="form-group")
       label(for="desc") Mô tả 

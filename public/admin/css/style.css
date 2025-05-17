@@ -99,14 +99,44 @@
 /* button close-image-preview */
 .close-image{
     position: relative;
+    border: 1px solid #ddd;
     padding: 0px 7px;
     font-size: 15px;
     font-weight: 600;
-    top:-65px;
-    left: -13px;
+    top:-23px;
+    left: 0px;
     border-radius: 50%;
+    cursor: pointer;
 }
 .image-preview[src=""] + .close-image{
     display: none;
 }
 /* end button close-image-preview */
+
+/* Audio Preview */
+.audio-preview{
+    border: 1px solid #ddd;
+    border-radius: 40px;
+    margin-top:15px;
+}
+.audio-preview{
+    display: none;
+}
+/* End Audio Preview */
+
+/* button close-audio-preview */
+.close-audio{
+    position: relative;
+    border: 1px solid #ddd;
+    padding: 0px 7px;
+    font-size: 15px;
+    font-weight: 600;
+    top:-23px;
+    left: 0px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.audio-preview + .close-audio{
+    display: none;
+}
+/* end button close-audio-preview */
