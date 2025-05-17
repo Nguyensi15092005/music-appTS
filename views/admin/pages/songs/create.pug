@@ -64,6 +64,16 @@ block main
         class="close-image"
       ) x
 
+    div(class="form-gruop")
+      label(for="audio") File âm thanh
+      input(
+        type="file"
+        name="audio"
+        class="form-control-file"
+        id="audio"
+        accept = "audio/*"
+      )
+    
     div(class="form-group")
       label(for="desc") Mô tả 
       textarea(

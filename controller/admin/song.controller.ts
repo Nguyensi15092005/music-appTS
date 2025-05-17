@@ -78,6 +78,14 @@ export const createPost = async (req: Request, res: Response) => {
         else {
             req.body.position = parseInt(req.body.position)
         }
+        let avatar ="";
+        let audio ="";
+        if(req.body.avatar){
+            avatar = req.body.avatar[0]
+        }
+        if(req.body.audio){
+            audio = req.body.audio[0]
+        }
         const dataSong = {
             title: req.body.title,
             topicId: req.body.topicId,
@@ -85,7 +93,8 @@ export const createPost = async (req: Request, res: Response) => {
             description: req.body.description,
             position: req.body.position,
             status: req.body.status,
-            avatar: req.body.avatar,
+            avatar: avatar,
+            audio: audio
         }
         const song = new Song(dataSong);
         await song.save();
