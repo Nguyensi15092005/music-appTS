@@ -18,7 +18,7 @@ block main
           .col-8 
           .col-4 
               a(
-                href=`${prefixAdmin}/topic/create`
+                href=`${prefixAdmin}/songs/create`
                 class="btn btn-outline-success active"
               ) +Thêm mới
       
@@ -31,6 +31,7 @@ block main
             th Tiêu đề
             th Ca sĩ
             th Chủ đề
+            th Vị trí
             th Trạng thái
             th Hành đông
         tbody 
@@ -47,6 +48,14 @@ block main
               td #{item.title}
               td #{item.infoSinger.fullName}
               td #{item.infoTopic.title}
+              td 
+                input(
+                  type="number"
+                  value=item.position 
+                  style="width:50px"
+                  min="1"
+                  name="position"
+                )
               td
                 if(item.status == "active")
                   a(
@@ -66,11 +75,11 @@ block main
                   ) Dừng hoạt động
               td 
                 a(
-                  href=`${prefixAdmin}/topic/detail/${item.id}`
+                  href=`${prefixAdmin}/songs/detail/${item.id}`
                   class="btn btn-info"
                 ) Chi tiết
                 a(
-                  href=`${prefixAdmin}/topic/edit/${item.id}`
+                  href=`${prefixAdmin}/songs/edit/${item.id}`
                   class="btn btn-warning"
                 ) Sửa
 

@@ -2,7 +2,6 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import * as database from "./config/database";
 import clientRoutes from "./routes/client/index.route";
-import bodyParser from 'body-parser';
 import path from "path";
 
 // flash
@@ -13,12 +12,10 @@ import adminRoutes from "./routes/admin/index.route";
 import { systemConfig } from "./config/config";
 
 dotenv.config();
+
 database.connect();
 const app: Express = express();
 const port: number | string = process.env.PORT || 3000;
-
-// App Local Variables
-app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 // flash 
 app.use(cookieParser('SISISISISISISI'));
@@ -27,10 +24,15 @@ app.use(flash());
 //end flash
 
 // để lấy đc thuộc tính trong req.body
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// App Local Variables
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 // nhúng file tĩnh 
 app.use(express.static("public"));
+
 
 app.set("views", "./views");
 app.set('view engine', 'pug');
