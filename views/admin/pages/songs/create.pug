@@ -84,6 +84,15 @@ block main
         close-audio 
         class="close-audio"
       ) x
+
+    div(class="form-group")
+      label(for="lyrics") Lời bài hát
+      textarea(
+        name="lyrics"
+        class="form-control"
+        id="lyrics"
+        rows="18"
+      )
     
     div(class="form-group")
       label(for="desc") Mô tả 
@@ -91,7 +100,7 @@ block main
         name="description"
         class="form-control textarea-mce"
         id="desc"
-        row="5"
+        rows="5"
       ) 
 
     div(class="form-group")

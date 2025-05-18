@@ -260,6 +260,7 @@ body{
 .singer-detail .inner-desc .inner-text{
     border-top:1px solid #ddd ;
     padding: 10px 15px ;
+    white-space: pre;
 }
 
 /* end singer-detail */

@@ -27,9 +27,9 @@ export const list = async (req: Request, res: Response) => {
                 status: "active",
                 deleted: false
             });
-        
+
             song["infoSinger"] = infoSinger;
-            song["countLike"] =  song.like.length;
+            song["countLike"] = song.like.length;
 
         }
 
@@ -57,15 +57,15 @@ export const detail = async (req: Request, res: Response) => {
             deleted: false,
             status: "active"
         });
+        if (user) {
+            song["isLikeSong"] = song.like.includes(user.id) ? true : false;
 
-        song["isLikeSong"] = song.like.includes(user.id) ? true : false;
-
-        const favorite = await FavoriteSong.findOne({
-            userId: user.id,
-            songId: song.id,
-        })
-
-        song["isFavoriteSong"] = favorite ? true : false;
+            const favorite = await FavoriteSong.findOne({
+                userId: user.id,
+                songId: song.id,
+            })
+            song["isFavoriteSong"] = favorite ? true : false;
+        }
 
         const singer = await Singer.findOne({
             _id: song.singerId,
@@ -84,6 +84,7 @@ export const detail = async (req: Request, res: Response) => {
             topic: topic,
         })
     } catch (error) {
+        console.log(error)
         req.flash("error", "Lỗi");
         res.redirect("/");
     }
@@ -197,12 +198,12 @@ export const listen = async (req: Request, res: Response) => {
         const listen: number = song.listen + 1;
 
         await Song.updateOne({
-            _id:idSong
-        },{
-            listen:listen
+            _id: idSong
+        }, {
+            listen: listen
         })
         const newSong = await Song.findOne({
-            _id:idSong
+            _id: idSong
         })
 
         res.json({

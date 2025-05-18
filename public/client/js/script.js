@@ -8,11 +8,13 @@ if (aplayer) {
   const ap = new APlayer({
     container: aplayer,
     autoplay: true, // tự động phát
+    lrcType: 1, // Lời bài hát chạy theo bài hát 
     audio: [{
       name: dataSong.title,
       artist: dataSinger.fullName,
       url: dataSong.audio,
-      cover: dataSong.avatar
+      cover: dataSong.avatar,
+      lrc: dataSong.lyrics, // Lời bài hát chạy theo bài hát
     }]
   });
 
