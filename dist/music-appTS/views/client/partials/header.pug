@@ -1,0 +1,52 @@
+header(class="header")
+
+  .container 
+    .row.align-items-center 
+      .col-2 
+        .inner-logo 
+          a(href="/")
+            img(src="/client/img/LOGO.jpg" alt="")
+      
+      .col-4.d-flex.align-items-center
+        .inner-menu 
+          ul  
+            if(user)
+              li
+                a(href="/") <i class="fa-solid fa-house"></i> Trang chủ
+              li
+                a(href="/topics") <i class="fa-solid fa-music"></i> Chủ đề
+              li
+                a(href="/favorite-songs") <i class="fa-solid fa-heart"></i> Yêu thích
+            else
+              li
+                a(href="/") <i class="fa-solid fa-house"></i> Trang chủ
+              li
+                a(href="/topics") <i class="fa-solid fa-music"></i> Chủ đề
+      
+      .col-3
+        .box-search 
+          form(action="/search/result" method="GET")
+            div(class="form-group d-flex mb-0")
+              input(
+                type="text"
+                placeholder="Search..."
+                class="form-control"
+                name="keyword"
+                value=keyword
+              )
+          .inner-suggest 
+            .inner-list 
+      .col-3
+        .inner-acount
+          ul
+            if(user)
+              li    
+                a(href="/users/logout" class="btn btn-danger btn-sm") Đăng xuất
+
+            else
+              li    
+                a(href="/users/register" class="btn btn-primary") Đăng ký
+              li 
+                a(href="/users/login" class="btn btn-success") Đăng nhập
+        
+        

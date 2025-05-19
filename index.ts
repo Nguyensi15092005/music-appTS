@@ -37,10 +37,10 @@ app.use(express.urlencoded({ extended: true }));
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 // nhúng file tĩnh 
-app.use(express.static("public"));
+app.use(express.static(`${__dirname}/public`));
 
 
-app.set("views", "./views");
+app.set("views", `${__dirname}/views`);
 app.set('view engine', 'pug');
 
 // TinyMCE
