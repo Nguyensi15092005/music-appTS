@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import * as database from "./config/database";
+import methodoverride from "method-override";
 import clientRoutes from "./routes/client/index.route";
 import path from "path";
 
@@ -22,6 +23,11 @@ app.use(cookieParser('SISISISISISISI'));
 app.use(session({ cookie: { maxAge: 60000 } }));
 app.use(flash());
 //end flash
+
+// Method-override
+app.use(methodoverride("_method"));
+// End Method-override
+
 
 // để lấy đc thuộc tính trong req.body
 app.use(express.json());

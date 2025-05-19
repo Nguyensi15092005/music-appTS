@@ -78,12 +78,12 @@ export const createPost = async (req: Request, res: Response) => {
         else {
             req.body.position = parseInt(req.body.position)
         }
-        let avatar ="";
-        let audio ="";
-        if(req.body.avatar){
+        let avatar = "";
+        let audio = "";
+        if (req.body.avatar) {
             avatar = req.body.avatar[0]
         }
-        if(req.body.audio){
+        if (req.body.audio) {
             audio = req.body.audio[0]
         }
         const dataSong = {
@@ -103,5 +103,67 @@ export const createPost = async (req: Request, res: Response) => {
     } catch (error) {
         req.flash("error", "lỗi");
         res.redirect(systemConfig.prefixAdmin + "/dashboard")
+    }
+}
+
+// [GET] /admin/songs/edit:id
+export const edit = async (req: Request, res: Response) => {
+    try {
+        const id: string = req.params.id;
+
+        const song = await Song.findOne({
+            _id: id,
+            deleted: false
+        });
+
+        const singers = await Singer.find({
+            deleted: false
+        }).select("fullName");
+
+        const topics = await Topic.find({
+            deleted: false
+        }).select("title");
+
+        res.render("admin/pages/songs/edit", {
+            pageTitle: "Chỉnh sửa bài hát",
+            song: song,
+            singers: singers,
+            topics: topics
+        })
+    } catch (error) {
+        req.flash("error", "Lỗi");
+        res.redirect(systemConfig.prefixAdmin + "/dashboard");
+    }
+}
+
+// [PATCH] /admin/songs/edit:id
+export const editPatch = async (req: Request, res: Response) => {
+    try {
+        const id: string = req.params.id;
+        const dataSong = {
+            title: req.body.title,
+            topicId: req.body.topicId,
+            singerId: req.body.singerId,
+            description: req.body.description,
+            status: req.body.status,
+            lyrics: req.body.lyrics
+        };
+        if (req.body.position) {
+            dataSong["position"] = parseInt(req.body.position);
+        }
+        if (req.body.avatar) {
+            dataSong["avatar"] = req.body.avatar[0];
+        }
+        if (req.body.audio) {
+            dataSong["audio"] = req.body.audio[0];
+        }
+
+        await Song.updateOne({ _id: id }, dataSong);
+        req.flash("success", "Cập nhật bài hát thành công");
+        res.redirect(`${systemConfig.prefixAdmin}/songs/edit/${id}`);
+    } catch (error) {
+        console.log(error)
+        req.flash("error", "Lỗi");
+        res.redirect(systemConfig.prefixAdmin + "/dashboard");
     }
 }

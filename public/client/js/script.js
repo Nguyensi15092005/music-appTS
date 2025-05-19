@@ -5,6 +5,7 @@ if (aplayer) {
   let dataSinger = aplayer.getAttribute("data-singer");
   dataSong = JSON.parse(dataSong);
   dataSinger = JSON.parse(dataSinger);
+  console.log(dataSong.lyrics)
   const ap = new APlayer({
     container: aplayer,
     autoplay: true, // tự động phát
