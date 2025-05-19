@@ -35,7 +35,7 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.topicRoutes = void 0;
 const express_1 = require("express");
-const controller = __importStar(require("../../music-appTS/controller/client/topic.controller"));
+const controller = __importStar(require("../../controller/client/topic.controller"));
 const router = (0, express_1.Router)();
 router.get("/", controller.index);
 exports.topicRoutes = router;

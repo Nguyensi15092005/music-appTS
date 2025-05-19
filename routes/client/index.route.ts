@@ -1,7 +1,6 @@
 import { Express } from 'express';
 
 import { infuUser } from '../../middlewares/user.middleware';
-import { requireAuth } from '../../middlewares/auth.middleware';
 
 import { topicRoutes } from "./topic.route";
 import { songRoutes } from "./song.route";

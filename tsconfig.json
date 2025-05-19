@@ -11,8 +11,4 @@
             "./src/types"
         ]
     },
-    "exclude": [
-        "node_modules",
-        "../task-management-TS"
-    ]
 }
