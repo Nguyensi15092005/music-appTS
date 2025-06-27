@@ -20,7 +20,12 @@ const port: number | string = process.env.PORT || 3000;
 
 // flash 
 app.use(cookieParser('SISISISISISISI'));
-app.use(session({ cookie: { maxAge: 60000 } }));
+app.use(session({
+  secret: 'SISISISISISISI',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60000 }
+}));
 app.use(flash());
 //end flash
 

@@ -5,6 +5,8 @@ import { dashboardRoutes } from './dashboard.route';
 import { topicsRoutes } from './topic.route';
 import { songRoutes } from './song.route';
 import { uploadRoutes } from './upload.route';
+import { authRoutes } from './auth.route';
+import { settingRoutes } from './settings.route';
 
 
 
@@ -19,8 +21,7 @@ const adminRoutes = (app: Express): void => {
 
     app.use(PATH_ADMIN + "/upload", uploadRoutes);
 
-
-
+    app.use(PATH_ADMIN + "/settings", settingRoutes);
 
 
 }

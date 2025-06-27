@@ -52,7 +52,12 @@ database.connect();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 app.use((0, cookie_parser_1.default)('SISISISISISISI'));
-app.use((0, express_session_1.default)({ cookie: { maxAge: 60000 } }));
+app.use((0, express_session_1.default)({
+    secret: 'SISISISISISISI',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 60000 }
+}));
 app.use((0, express_flash_1.default)());
 app.use((0, method_override_1.default)("_method"));
 app.use(express_1.default.json());
